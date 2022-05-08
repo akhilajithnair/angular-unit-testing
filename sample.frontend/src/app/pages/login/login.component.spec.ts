@@ -34,4 +34,9 @@ describe('Login component', () => {
     const result = loginComponent.needsLogin();
     expect(result).toBeTruthy();
   });
+
+  it('should return false for needsLogin() when there is token.', () => {
+    spyOn(service, 'isAuthenticated').and.returnValue(false);
+    expect(loginComponent.needsLogin()).toBeFalsy();
+  })
 })
