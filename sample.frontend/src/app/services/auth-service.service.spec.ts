@@ -19,7 +19,7 @@ describe('AuthService', () => {
     expect(service.isAuthenticated()).toBeTruthy();
   });
 
-  it('it should return false for isAuthenticated() when there is no token.', () => {
+  it('should return false for isAuthenticated() when there is no token.', () => {
     expect(service.isAuthenticated()).toBeFalsy();
   });
 });
