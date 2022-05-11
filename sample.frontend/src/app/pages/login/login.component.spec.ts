@@ -12,12 +12,19 @@ export class MockAuthService {
 
 describe('Login component', () => {
 
-  let loginComponent: LoginComponent;
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
   let service: MockAuthService;
 
   beforeEach(() => {
-    service = new MockAuthService();
-    loginComponent = new LoginComponent(service);
+    TestBed.configureTestingModule({
+      imports: [LoginComponent],
+      providers: [AuthService]
+    });
+
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.componentInstance;
+    service = TestBed.inject(AuthService);
   });
 
   afterEach(() => {
@@ -25,18 +32,18 @@ describe('Login component', () => {
   });
 
   it('should return true for needsLogin() when there is no token stored in local storage.', () => {
-    const result = loginComponent.needsLogin();
+    const result = component.needsLogin();
     expect(result).toBeFalsy();
   });
 
   it('should return false for needsLogin() when there is token stored in local storage.', () => {
     localStorage.setItem('token', '1234');
-    const result = loginComponent.needsLogin();
+    const result = component.needsLogin();
     expect(result).toBeTruthy();
   });
 
   it('should return false for needsLogin() when there is token.', () => {
     spyOn(service, 'isAuthenticated').and.returnValue(false);
-    expect(loginComponent.needsLogin()).toBeFalsy();
+    expect(component.needsLogin()).toBeFalsy();
   })
 })
