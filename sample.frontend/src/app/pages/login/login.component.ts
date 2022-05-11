@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   }
 
   needsLogin() {
-    return this.authService.isAuthenticated();
+    return !this.authService.isAuthenticated();
   }
 
 }
